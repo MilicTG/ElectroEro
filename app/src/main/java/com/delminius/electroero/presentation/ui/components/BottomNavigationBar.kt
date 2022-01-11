@@ -52,7 +52,7 @@ fun BottomNavigationBar(
                     )
                 },
                 selectedContentColor = LightBackgroundAndTextColor,
-                unselectedContentColor = Color.Gray,
+                unselectedContentColor = Color.Gray.copy(alpha = 0.6f),
                 alwaysShowLabel = true,
                 onClick = {
                     navController.navigate(screen.route){

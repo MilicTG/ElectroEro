@@ -17,19 +17,13 @@ fun SetupNavigation(
         startDestination = ApplicationScreens.HomeScreen.route
     ) {
         composable(ApplicationScreens.HomeScreen.route) {
-            HomeScreen(
-                navController = navController
-            )
+            HomeScreen()
         }
         composable(ApplicationScreens.BranchesScreen.route) {
-            BranchesScreen(
-                navController = navController
-            )
+            BranchesScreen()
         }
         composable(ApplicationScreens.SubscriptionScreen.route) {
-            SubscriptionsScreen(
-                navController = navController
-            )
+            SubscriptionsScreen()
         }
     }
 }
