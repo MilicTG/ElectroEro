@@ -1,4 +1,4 @@
-package com.delminius.electroero.ui.theme
+package com.delminius.electroero.presentation.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

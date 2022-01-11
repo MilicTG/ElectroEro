@@ -1,4 +1,4 @@
-package com.delminius.electroero.ui.theme
+package com.delminius.electroero.presentation.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
