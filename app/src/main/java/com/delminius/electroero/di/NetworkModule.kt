@@ -4,20 +4,16 @@ import com.delminius.electroero.data.remote.HzhbApi
 import com.delminius.electroero.data.repository.RemoteDataSource
 import com.delminius.electroero.data.repository.RemoteDataSourceImpl
 import com.delminius.electroero.util.Constants.BASE_URL
-import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.json.Json
-import okhttp3.MediaType
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
-@ExperimentalSerializationApi
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
@@ -34,11 +30,10 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideRetrofitInstance(okHttpClient: OkHttpClient): Retrofit {
-        val contentType = MediaType.get("application/json")
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(okHttpClient)
-            .addConverterFactory(Json.asConverterFactory(contentType))
+            .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 
