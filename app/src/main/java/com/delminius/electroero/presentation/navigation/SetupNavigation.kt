@@ -6,7 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.delminius.electroero.domain.model.SnackBarContent
 import com.delminius.electroero.presentation.ui.screens.branches.BranchesScreen
-import com.delminius.electroero.presentation.ui.screens.HomeScreen
+import com.delminius.electroero.presentation.ui.screens.home.HomeScreen
 import com.delminius.electroero.presentation.ui.screens.SubscriptionsScreen
 
 @Composable
