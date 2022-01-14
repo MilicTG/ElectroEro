@@ -7,12 +7,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.produceState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.delminius.electroero.R
-import com.delminius.electroero.domain.model.BranchOffices
+import com.delminius.electroero.domain.model.SnackBarContent
 import com.delminius.electroero.presentation.ui.components.BranchesListCard
 import com.delminius.electroero.presentation.ui.components.DownloadingInProgress
 import com.delminius.electroero.presentation.ui.components.ErrorDownloadingComponent
@@ -24,6 +23,7 @@ import com.delminius.electroero.util.Resource
 
 @Composable
 fun BranchesScreen(
+    onSubscribeClicked: (SnackBarContent)-> Unit,
     branchesViewModel: BranchesViewModel = hiltViewModel()
 ) {
 
@@ -52,7 +52,14 @@ fun BranchesScreen(
                     ) { branchOffice ->
                         BranchesListCard(
                             branchName = branches.value.data!![branchOffice].name,
-                            onSubscribeClicked = {}
+                            onSubscribeClicked = {
+                                onSubscribeClicked(
+                                    SnackBarContent(
+                                       snackMessage = "Poslovnica dodana",
+                                        snackAction = "Poništi"
+                                    )
+                                )
+                            }
                         )
                     }
                 }
