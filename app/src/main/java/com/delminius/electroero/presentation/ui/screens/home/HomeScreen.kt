@@ -34,7 +34,7 @@ fun HomeScreen(
              DownloadingInProgress()
          }
          is Resource.Success -> {
-             Text(text = powerCut.value.data!![0].branchOfficeName)
+             Text(text = powerCut.value.data!!.toString())
          }
          is Resource.Error -> {
              ErrorDownloadingComponent(
