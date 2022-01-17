@@ -11,7 +11,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import kotlinx.datetime.*
+import kotlinx.datetime.TimeZone
 import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -19,7 +22,15 @@ class HomeViewModel @Inject constructor(
     private val useCases: UseCases
 ) : ViewModel() {
 
-    private val datFormatter = SimpleDateFormat("EE dd.M.yyyy")
+    val today: LocalDate = Clock.System.todayAt(TimeZone.currentSystemDefault())
+    val tomorrow = today.plus(1, DateTimeUnit.DAY)
+    val dayThree =  today.plus(2, DateTimeUnit.DAY)
+    private val currentDate = Date()
+
+
+    val formatter = SimpleDateFormat("d.MM.yyyy")
+    val formatToday = formatter.parse(currentDate.toString())
+
 
     private val _currentPowerCutDayList =
         MutableStateFlow<Resource<PowerCutOffice>>(value = Resource.Loading())
@@ -27,7 +38,7 @@ class HomeViewModel @Inject constructor(
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            _currentPowerCutDayList.value = useCases.getPowerCutOfficeUseCase(date = "2022-1-17")
+            _currentPowerCutDayList.value = useCases.getPowerCutOfficeUseCase(date =dayThree.toString())
         }
         Log.d("ovde",currentPowerCutDayList.value.toString() )
     }

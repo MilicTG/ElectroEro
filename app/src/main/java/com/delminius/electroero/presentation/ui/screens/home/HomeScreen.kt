@@ -18,7 +18,7 @@ import com.delminius.electroero.util.Resource
 fun HomeScreen(
     homeViewModel: HomeViewModel = hiltViewModel()
 ) {
-     val powerCut = homeViewModel.currentPowerCutDayList.collectAsState()
+    val powerCut = homeViewModel.currentPowerCutDayList.collectAsState()
 
     Column(
         modifier = Modifier
@@ -29,19 +29,24 @@ fun HomeScreen(
             headerSubtitle = stringResource(R.string.home_subtitle),
             onInfoButtonClicked = {}
         )
-     when (powerCut.value){
-         is Resource.Loading -> {
-             DownloadingInProgress()
-         }
-         is Resource.Success -> {
-             Text(text = powerCut.value.data!!.toString())
-         }
-         is Resource.Error -> {
-             ErrorDownloadingComponent(
-                 errorMessage = powerCut.value.message!!
-             )
-         }
-     }
+
+        Text(text = homeViewModel.formatToday.toString())
+        Text(text = homeViewModel.tomorrow.toString())
+        Text(text = homeViewModel.dayThree.toString())
+
+        when (powerCut.value) {
+            is Resource.Loading -> {
+                DownloadingInProgress()
+            }
+            is Resource.Success -> {
+                Text(text = powerCut.value.data!!.toString())
+            }
+            is Resource.Error -> {
+                ErrorDownloadingComponent(
+                    errorMessage = powerCut.value.message!!
+                )
+            }
+        }
 
     }
 
