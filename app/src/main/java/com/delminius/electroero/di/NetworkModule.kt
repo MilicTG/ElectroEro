@@ -1,7 +1,7 @@
 package com.delminius.electroero.di
 
 import com.delminius.electroero.data.remote.HzhbApi
-import com.delminius.electroero.data.repository.RemoteDataSource
+import com.delminius.electroero.domain.repository.RemoteDataSource
 import com.delminius.electroero.data.repository.RemoteDataSourceImpl
 import com.delminius.electroero.util.Constants.BASE_URL
 import dagger.Module

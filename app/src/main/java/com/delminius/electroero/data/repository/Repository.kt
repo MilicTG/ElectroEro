@@ -2,6 +2,7 @@ package com.delminius.electroero.data.repository
 
 import com.delminius.electroero.domain.model.BranchOffices
 import com.delminius.electroero.domain.model.PowerCutOffice
+import com.delminius.electroero.domain.repository.RemoteDataSource
 import com.delminius.electroero.util.Resource
 import javax.inject.Inject
 

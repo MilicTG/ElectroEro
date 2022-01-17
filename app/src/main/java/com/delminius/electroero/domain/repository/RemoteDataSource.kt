@@ -1,4 +1,4 @@
-package com.delminius.electroero.data.repository
+package com.delminius.electroero.domain.repository
 
 import com.delminius.electroero.domain.model.BranchOffices
 import com.delminius.electroero.domain.model.PowerCutOffice
