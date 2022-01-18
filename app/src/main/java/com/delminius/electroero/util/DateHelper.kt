@@ -1,5 +1,6 @@
 package com.delminius.electroero.util
 
+import com.delminius.electroero.util.Constants.DATE_PATTERN
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -8,13 +9,17 @@ fun Date.toString(format: String, locale: Locale = Locale("Hr", "hr")): String {
     return formatter.format(this)
 }
 
-fun getCurrentDateTime(): Date {
-    return Calendar.getInstance().time
-}
-
-fun getTomorrowDateTime(): Date {
+fun getDateOrDayForSpecificDay(day: String): String {
     val calendar = Calendar.getInstance()
-    calendar.add(Calendar.DAY_OF_YEAR, 1)
 
-    return calendar.time
+    return when (day) {
+        "firstDate" -> calendar.time.toString(format = DATE_PATTERN)
+        "secondDate" -> calendar.apply {
+            add(Calendar.DAY_OF_YEAR, 1)
+        }.time.toString(format = DATE_PATTERN)
+        "thirdDate" ->  calendar.apply {
+            add(Calendar.DAY_OF_YEAR, 2)
+        }.time.toString(format = DATE_PATTERN)
+        else -> ""
+    }
 }
