@@ -6,6 +6,9 @@ import androidx.lifecycle.viewModelScope
 import com.delminius.electroero.domain.model.PowerCutOffice
 import com.delminius.electroero.domain.use_cases.UseCases
 import com.delminius.electroero.util.Resource
+import com.delminius.electroero.util.getCurrentDateTime
+import com.delminius.electroero.util.getTomorrowDateTime
+import com.delminius.electroero.util.toString
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,8 +16,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.datetime.*
 import kotlinx.datetime.TimeZone
-import java.text.SimpleDateFormat
-import java.util.*
+
 import javax.inject.Inject
 
 @HiltViewModel
@@ -25,11 +27,12 @@ class HomeViewModel @Inject constructor(
     val today: LocalDate = Clock.System.todayAt(TimeZone.currentSystemDefault())
     val tomorrow = today.plus(1, DateTimeUnit.DAY)
     val dayThree =  today.plus(2, DateTimeUnit.DAY)
-    private val currentDate = Date()
 
 
-    val formatter = SimpleDateFormat("d.MM.yyyy")
-    val formatToday = formatter.parse(currentDate.toString())
+    val date = getCurrentDateTime()
+    val tomorrowDate = getTomorrowDateTime()
+    val dateInString = date.toString("dd.MM.yyyy EEEE")
+    val tomorrowInString = tomorrowDate.toString("dd.MM.yyyy EEEE")
 
 
     private val _currentPowerCutDayList =
@@ -38,7 +41,7 @@ class HomeViewModel @Inject constructor(
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            _currentPowerCutDayList.value = useCases.getPowerCutOfficeUseCase(date =dayThree.toString())
+            _currentPowerCutDayList.value = useCases.getPowerCutOfficeUseCase(date = tomorrow.toString())
         }
         Log.d("ovde",currentPowerCutDayList.value.toString() )
     }

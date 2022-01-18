@@ -30,8 +30,8 @@ fun HomeScreen(
             onInfoButtonClicked = {}
         )
 
-        Text(text = homeViewModel.formatToday.toString())
-        Text(text = homeViewModel.tomorrow.toString())
+        Text(text = homeViewModel.dateInString)
+        Text(text = homeViewModel.tomorrowInString)
         Text(text = homeViewModel.dayThree.toString())
 
         when (powerCut.value) {
