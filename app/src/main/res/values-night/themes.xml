@@ -13,7 +13,7 @@
         <item name="android:statusBarColor">@color/darkBackgroundAndTextColor</item>
         <item name="android:navigationBarColor">@color/darkBackgroundAndTextColor</item>
 
-        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
         <!-- Customize your theme here. -->
     </style>

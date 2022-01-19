@@ -1,10 +1,10 @@
 package com.delminius.electroero.presentation.ui.components
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Card
+import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -13,14 +13,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
 import com.delminius.electroero.presentation.ui.theme.*
+import com.delminius.electroero.util.getDayFromDateString
 
 @Composable
 fun PowerCutDayCard(
     background: Color,
     branchName: String,
     powerCutLocation: String,
-    powerCutTime: String
+    powerCutTimeFrom: String,
+    powerCutTimeTo: String
 ) {
     Card(
         modifier = Modifier
@@ -50,8 +53,7 @@ fun PowerCutDayCard(
                     .padding(
                         start = NORMAL_PADDING,
                         end = NORMAL_PADDING,
-                        top = LARGE_PADDING,
-                        bottom = SMALL_PADDING
+                        top = NORMAL_PADDING,
                     )
             )
             Text(
@@ -61,7 +63,28 @@ fun PowerCutDayCard(
                 ),
                 modifier = Modifier
                     .padding(
-                        all = NORMAL_PADDING,
+                        horizontal = NORMAL_PADDING,
+                        vertical = SMALL_PADDING
+                    )
+            )
+            Divider(
+                color = DarkBackgroundAndTextColor.copy(alpha = 0.3f),
+                thickness = 1.dp,
+                modifier = Modifier
+                    .padding(
+                        horizontal = NORMAL_PADDING,
+                        vertical = SMALL_PADDING
+                    )
+            )
+            Text(
+                text = "Vrijeme nestanka struje: ${getDayFromDateString(powerCutTimeFrom)} - ${getDayFromDateString(powerCutTimeTo)}",
+                style = TextStyle(
+                    fontSize = MaterialTheme.typography.body1.fontSize
+                ),
+                modifier = Modifier
+                    .padding(
+                        horizontal = NORMAL_PADDING,
+                        vertical = LARGE_PADDING
                     )
             )
         }
