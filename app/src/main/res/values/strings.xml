@@ -6,4 +6,7 @@
     <string name="all_branches">Sve poslovnice Elektroprivrede HZHB</string>
     <string name="subscriptions">Pretplate</string>
     <string name="follow_subscriptions">Pratite vaše poslovnice</string>
+
+    <string name="refresh">Osvježi</string>
+    <string name="info">Info</string>
 </resources>

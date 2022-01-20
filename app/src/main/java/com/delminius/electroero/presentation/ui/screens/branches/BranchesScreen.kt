@@ -8,14 +8,11 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.delminius.electroero.R
 import com.delminius.electroero.domain.model.SnackBarContent
 import com.delminius.electroero.presentation.ui.components.BranchesListCard
 import com.delminius.electroero.presentation.ui.components.DownloadingInProgress
 import com.delminius.electroero.presentation.ui.components.ErrorDownloadingComponent
-import com.delminius.electroero.presentation.ui.components.TopAppHeader
 import com.delminius.electroero.presentation.ui.theme.BOTTOM_PADDING
 import com.delminius.electroero.presentation.ui.theme.NORMAL_PADDING
 import com.delminius.electroero.presentation.ui.theme.SMALL_PADDING
@@ -26,19 +23,12 @@ fun BranchesScreen(
     onSubscribeClicked: (SnackBarContent)-> Unit,
     branchesViewModel: BranchesViewModel = hiltViewModel()
 ) {
-
     val branches = branchesViewModel.allBranchOffices.collectAsState()
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(bottom = BOTTOM_PADDING),
     ) {
-        TopAppHeader(
-            headerTitle = stringResource(R.string.branches),
-            headerSubtitle = stringResource(R.string.all_branches),
-            onInfoButtonClicked = {}
-        )
-
         when (branches.value) {
             is Resource.Success -> {
                 LazyColumn(

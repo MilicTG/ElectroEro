@@ -4,9 +4,14 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
+import com.delminius.electroero.presentation.navigation.ApplicationScreens
 import com.delminius.electroero.presentation.navigation.SetupNavigation
+import com.delminius.electroero.presentation.ui.components.AppHomeTopBar
+import com.delminius.electroero.presentation.ui.components.AppTopBar
 import com.delminius.electroero.presentation.ui.components.BottomNavigationBar
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.collect
@@ -19,6 +24,7 @@ fun ContainerScreen(
     containerViewModel: ContainerViewModel = hiltViewModel()
 ) {
     val scaffoldState = rememberScaffoldState()
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
 
     LaunchedEffect(key1 = true) {
         containerViewModel.uiEvent.collect { event ->
@@ -35,6 +41,54 @@ fun ContainerScreen(
 
     Scaffold(
         scaffoldState = scaffoldState,
+        topBar = {
+            when (navBackStackEntry?.destination?.route) {
+                ApplicationScreens.HomeScreen.route -> {
+                    AppHomeTopBar(
+                        title = "Planirani radovi",
+                        onRefreshClicked = {
+                            containerViewModel.onEvent(
+                                ContainerEvent.RefreshAction
+                            )
+                        },
+                        onInfoClicked = {
+                            containerViewModel.onEvent(
+                                ContainerEvent.TopAppBarAction(
+                                    title = "",
+                                    message = ""
+                                )
+                            )
+                        }
+                    )
+                }
+                ApplicationScreens.BranchesScreen.route -> {
+                    AppTopBar(
+                        title = "Poslovnice",
+                        onInfoClicked = {
+                            containerViewModel.onEvent(
+                                ContainerEvent.TopAppBarAction(
+                                    title = "",
+                                    message = ""
+                                )
+                            )
+                        }
+                    )
+                }
+                ApplicationScreens.SubscriptionScreen.route -> {
+                    AppTopBar(
+                        title = "Pretplate",
+                        onInfoClicked = {
+                            containerViewModel.onEvent(
+                                ContainerEvent.TopAppBarAction(
+                                    title = "",
+                                    message = ""
+                                )
+                            )
+                        }
+                    )
+                }
+            }
+        },
         bottomBar = {
             BottomNavigationBar(
                 navController = navController

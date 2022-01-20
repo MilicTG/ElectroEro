@@ -8,9 +8,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.delminius.electroero.R
 import com.delminius.electroero.presentation.ui.components.*
 import com.delminius.electroero.presentation.ui.theme.*
 import com.delminius.electroero.util.Resource
@@ -28,12 +26,6 @@ fun HomeScreen(
             .fillMaxSize()
             .padding(bottom = BOTTOM_PADDING),
     ) {
-        TopAppHeader(
-            headerTitle = stringResource(R.string.welcome),
-            headerSubtitle = stringResource(R.string.home_subtitle),
-            onInfoButtonClicked = {}
-        )
-
         LazyColumn(
             contentPadding = PaddingValues(
                 all = SMALL_PADDING

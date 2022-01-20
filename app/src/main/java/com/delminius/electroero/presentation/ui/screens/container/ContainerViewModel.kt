@@ -24,6 +24,13 @@ class ContainerViewModel @Inject constructor(
                     _uiEvent.send(event)
                 }
             }
+            is ContainerEvent.TopAppBarAction -> {
+
+            }
+
+            is ContainerEvent.RefreshAction -> {
+
+            }
         }
     }
 
