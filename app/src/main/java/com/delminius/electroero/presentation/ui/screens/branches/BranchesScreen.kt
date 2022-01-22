@@ -14,13 +14,14 @@ import com.delminius.electroero.presentation.ui.components.BranchesListCard
 import com.delminius.electroero.presentation.ui.components.DownloadingInProgress
 import com.delminius.electroero.presentation.ui.components.ErrorDownloadingComponent
 import com.delminius.electroero.presentation.ui.theme.BOTTOM_PADDING
+import com.delminius.electroero.presentation.ui.theme.LARGE_PADDING
 import com.delminius.electroero.presentation.ui.theme.NORMAL_PADDING
 import com.delminius.electroero.presentation.ui.theme.SMALL_PADDING
 import com.delminius.electroero.util.Resource
 
 @Composable
 fun BranchesScreen(
-    onSubscribeClicked: (SnackBarContent)-> Unit,
+    onSubscribeClicked: (SnackBarContent) -> Unit,
     branchesViewModel: BranchesViewModel = hiltViewModel()
 ) {
     val branches = branchesViewModel.allBranchOffices.collectAsState()
@@ -33,8 +34,8 @@ fun BranchesScreen(
             is Resource.Success -> {
                 LazyColumn(
                     contentPadding = PaddingValues(
-                        vertical = NORMAL_PADDING,
-                        horizontal = SMALL_PADDING
+                        top = SMALL_PADDING,
+                        bottom = LARGE_PADDING
                     )
                 ) {
                     items(
@@ -45,7 +46,7 @@ fun BranchesScreen(
                             onSubscribeClicked = {
                                 onSubscribeClicked(
                                     SnackBarContent(
-                                       snackMessage = "Poslovnica dodana",
+                                        snackMessage = "Poslovnica dodana",
                                         snackAction = "Poništi"
                                     )
                                 )

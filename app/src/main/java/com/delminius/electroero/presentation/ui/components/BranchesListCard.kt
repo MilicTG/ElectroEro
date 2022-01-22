@@ -4,10 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Card
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -44,7 +41,9 @@ fun BranchesListCard(
         ) {
             Text(
                 text = branchName,
-                style = TextStyle(fontWeight = FontWeight.Bold)
+                style = MaterialTheme.typography.body1.copy(
+                    fontWeight = FontWeight.SemiBold
+                )
             )
             IconButton(onClick = { onSubscribeClicked() }) {
                 Icon(

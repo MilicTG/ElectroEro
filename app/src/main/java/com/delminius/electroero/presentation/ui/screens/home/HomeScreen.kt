@@ -28,8 +28,9 @@ fun HomeScreen(
     ) {
         LazyColumn(
             contentPadding = PaddingValues(
-                all = SMALL_PADDING
-            )
+                top = SMALL_PADDING,
+                bottom = LARGE_PADDING
+            ),
         ) {
             item {
                 PowerCutDayName(day = homeViewModel.firstDayText)

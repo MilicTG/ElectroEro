@@ -29,7 +29,7 @@ class ContainerViewModel @Inject constructor(
             }
 
             is ContainerEvent.RefreshAction -> {
-
+                useCases.getPowerCutOfficeUseCase
             }
         }
     }
