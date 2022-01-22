@@ -13,13 +13,18 @@ import com.delminius.electroero.presentation.ui.screens.SubscriptionsScreen
 fun SetupNavigation(
     navController: NavHostController,
     onSubscribeClicked: (SnackBarContent) -> Unit,
+    isRefreshing: Boolean,
+    stopRefreshing: (Boolean) -> Unit,
 ) {
     NavHost(
         navController = navController,
         startDestination = ApplicationScreens.HomeScreen.route
     ) {
         composable(ApplicationScreens.HomeScreen.route) {
-            HomeScreen()
+            HomeScreen(
+                isRefreshing = isRefreshing,
+                stopRefreshing = stopRefreshing
+            )
         }
         composable(ApplicationScreens.BranchesScreen.route) {
             BranchesScreen(

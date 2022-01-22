@@ -20,17 +20,21 @@ class ContainerViewModel @Inject constructor(
     fun onEvent(event: ContainerEvent) {
         when (event) {
             is ContainerEvent.ShowSnackBar -> {
-                viewModelScope.launch {
-                    _uiEvent.send(event)
-                }
+                sendUiEvent(event = event)
             }
             is ContainerEvent.TopAppBarAction -> {
 
             }
 
             is ContainerEvent.RefreshAction -> {
-                useCases.getPowerCutOfficeUseCase
+                sendUiEvent(event = event)
             }
+        }
+    }
+
+    private fun sendUiEvent(event: ContainerEvent) {
+        viewModelScope.launch {
+            _uiEvent.send(event)
         }
     }
 

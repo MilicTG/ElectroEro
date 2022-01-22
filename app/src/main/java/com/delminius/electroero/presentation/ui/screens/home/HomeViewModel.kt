@@ -43,6 +43,10 @@ class HomeViewModel @Inject constructor(
     val thirdDayPowerCutDayList: StateFlow<Resource<PowerCutOffice>> = _thirdDayPowerCutDayList
 
     init {
+        getDataToLists()
+    }
+
+    fun getDataToLists() {
         viewModelScope.launch(Dispatchers.IO) {
             _firstDayPowerCutDayList.value =
                 useCases.getPowerCutOfficeUseCase(date = firstPowerCutDay.toString())
@@ -51,7 +55,6 @@ class HomeViewModel @Inject constructor(
             _thirdDayPowerCutDayList.value =
                 useCases.getPowerCutOfficeUseCase(date = thirdPowerCutDay.toString())
         }
-
     }
 
     fun onEvent(event: HomeEvent) {

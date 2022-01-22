@@ -2,9 +2,7 @@ package com.delminius.electroero.presentation.ui.screens.container
 
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -25,6 +23,7 @@ fun ContainerScreen(
 ) {
     val scaffoldState = rememberScaffoldState()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
+    var isRefreshing by remember { (mutableStateOf(value = false)) }
 
     LaunchedEffect(key1 = true) {
         containerViewModel.uiEvent.collect { event ->
@@ -34,6 +33,9 @@ fun ContainerScreen(
                         message = event.message,
                         actionLabel = event.action
                     )
+                }
+                is ContainerEvent.RefreshAction -> {
+                    isRefreshing = true
                 }
             }
         }
@@ -104,7 +106,9 @@ fun ContainerScreen(
                         action = content.snackAction
                     )
                 )
-            }
+            },
+            isRefreshing = isRefreshing,
+            stopRefreshing = { isRefreshing = false }
         )
     }
 }
