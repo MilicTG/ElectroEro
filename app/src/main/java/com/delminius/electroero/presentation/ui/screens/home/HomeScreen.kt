@@ -25,10 +25,10 @@ fun HomeScreen(
     val secondDayPowerCutDayList = homeViewModel.secondDayPowerCutDayList.collectAsState()
     val thirdDayPowerCutDayList = homeViewModel.thirdDayPowerCutDayList.collectAsState()
 
-    LaunchedEffect(key1 = isRefreshing){
+    LaunchedEffect(key1 = isRefreshing) {
         when (isRefreshing) {
             true -> {
-                homeViewModel.getDataToLists()
+                homeViewModel.refreshDataForPowerOutages()
             }
             false -> {
                 stopRefreshing(false)
@@ -48,7 +48,7 @@ fun HomeScreen(
             ),
         ) {
             item {
-                PowerCutDayName(day = homeViewModel.firstDayText)
+                PowerCutDayName(day = homeViewModel.firstDayText.value)
             }
             when (firstDayPowerCutDayList.value) {
                 is Resource.Loading -> {
@@ -84,7 +84,7 @@ fun HomeScreen(
             }
 
             item {
-                PowerCutDayName(day = homeViewModel.secondDayText)
+                PowerCutDayName(day = homeViewModel.secondDayText.value)
             }
             when (secondDayPowerCutDayList.value) {
                 is Resource.Loading -> {
@@ -120,7 +120,7 @@ fun HomeScreen(
             }
 
             item {
-                PowerCutDayName(day = homeViewModel.thirdDayText)
+                PowerCutDayName(day = homeViewModel.thirdDayText.value)
             }
             when (thirdDayPowerCutDayList.value) {
                 is Resource.Loading -> {

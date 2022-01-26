@@ -1,5 +1,7 @@
 package com.delminius.electroero.presentation.ui.screens.home
 
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.delminius.electroero.domain.model.PowerCutOffice
@@ -20,14 +22,9 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val useCases: UseCases
 ) : ViewModel() {
-
-    private val firstPowerCutDay: LocalDate = Clock.System.todayAt(TimeZone.currentSystemDefault())
-    private val secondPowerCutDay = firstPowerCutDay.plus(1, DateTimeUnit.DAY)
-    private val thirdPowerCutDay = firstPowerCutDay.plus(2, DateTimeUnit.DAY)
-
-    val firstDayText = getDateOrDayForSpecificDay(day = "firstDate")
-    val secondDayText = getDateOrDayForSpecificDay(day = "secondDate")
-    val thirdDayText = getDateOrDayForSpecificDay(day = "thirdDate")
+    val firstDayText: MutableState<String> = mutableStateOf(value = "")
+    val secondDayText: MutableState<String> = mutableStateOf(value = "")
+    val thirdDayText: MutableState<String> = mutableStateOf(value = "")
 
 
     private val _firstDayPowerCutDayList =
@@ -48,10 +45,16 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun getDatesForDays() {
-        val currentDay: LocalDate = Clock.System.todayAt(TimeZone.currentSystemDefault())
+        firstDayText.value = getDateOrDayForSpecificDay(day = "firstDate")
+        secondDayText.value = getDateOrDayForSpecificDay(day = "secondDate")
+        thirdDayText.value = getDateOrDayForSpecificDay(day = "thirdDate")
     }
 
-    fun getDataToLists() {
+    private fun getDataToLists() {
+        val firstPowerCutDay: LocalDate = Clock.System.todayAt(TimeZone.currentSystemDefault())
+        val secondPowerCutDay = firstPowerCutDay.plus(1, DateTimeUnit.DAY)
+        val thirdPowerCutDay = firstPowerCutDay.plus(2, DateTimeUnit.DAY)
+
         viewModelScope.launch(Dispatchers.IO) {
             _firstDayPowerCutDayList.value =
                 useCases.getPowerCutOfficeUseCase(date = firstPowerCutDay.toString())
@@ -60,6 +63,11 @@ class HomeViewModel @Inject constructor(
             _thirdDayPowerCutDayList.value =
                 useCases.getPowerCutOfficeUseCase(date = thirdPowerCutDay.toString())
         }
+    }
+
+    fun refreshDataForPowerOutages() {
+        getDatesForDays()
+        getDataToLists()
     }
 
     fun onEvent(event: HomeEvent) {
