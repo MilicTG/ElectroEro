@@ -29,11 +29,9 @@ fun HomeScreen(
         when (isRefreshing) {
             true -> {
                 homeViewModel.getDataToLists()
-                Log.e("ovde", isRefreshing.toString())
             }
             false -> {
                 stopRefreshing(false)
-                Log.e("ovde", isRefreshing.toString())
             }
         }
     }

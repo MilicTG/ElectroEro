@@ -43,7 +43,12 @@ class HomeViewModel @Inject constructor(
     val thirdDayPowerCutDayList: StateFlow<Resource<PowerCutOffice>> = _thirdDayPowerCutDayList
 
     init {
+        getDatesForDays()
         getDataToLists()
+    }
+
+    private fun getDatesForDays() {
+        val currentDay: LocalDate = Clock.System.todayAt(TimeZone.currentSystemDefault())
     }
 
     fun getDataToLists() {
