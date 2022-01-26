@@ -7,7 +7,7 @@ import androidx.navigation.compose.composable
 import com.delminius.electroero.domain.model.SnackBarContent
 import com.delminius.electroero.presentation.ui.screens.branches.BranchesScreen
 import com.delminius.electroero.presentation.ui.screens.home.HomeScreen
-import com.delminius.electroero.presentation.ui.screens.SubscriptionsScreen
+import com.delminius.electroero.presentation.ui.screens.subscriptions.SubscriptionsScreen
 
 @Composable
 fun SetupNavigation(
