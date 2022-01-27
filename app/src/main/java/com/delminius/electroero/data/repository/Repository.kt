@@ -28,4 +28,8 @@ class Repository @Inject constructor(
     suspend fun addToBranchSubscription(branchOfficesItem: BranchOfficesItem) {
         return localDataSource.addToBranchSubscription(branchOfficesItem = branchOfficesItem)
     }
+
+    suspend fun deleteSubscribedBranch(branchOfficesItem: BranchOfficesItem) {
+        return localDataSource.deleteSubscribedBranch(branchOfficesItem = branchOfficesItem)
+    }
 }

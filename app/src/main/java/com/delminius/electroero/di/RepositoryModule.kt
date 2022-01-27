@@ -19,7 +19,8 @@ object RepositoryModule {
             getAllBranchOfficesUseCase = GetAllBranchOfficesUseCase(repository = repository),
             getPowerCutOfficeUseCase = GetPowerCutOfficeUseCase(repository = repository),
             getAllElektraSubscriptionUseCase = GetAllElektraSubscriptionUseCase(repository = repository),
-            addToBranchSubscriptionUseCase = AddToBranchSubscriptionUseCase(repository = repository)
+            addToBranchSubscriptionUseCase = AddToBranchSubscriptionUseCase(repository = repository),
+            deleteSubscribedBranchUseCase = DeleteSubscribedBranchUseCase(repository = repository)
         )
     }
 }

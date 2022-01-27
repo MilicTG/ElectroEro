@@ -15,4 +15,8 @@ class LocalDataSourceImpl(private val elektraDao: ElektraDao) : LocalDataSource 
         return elektraDao.addToBranchSubscription(branchOfficesItem = branchOfficesItem)
     }
 
+    override suspend fun deleteSubscribedBranch(branchOfficesItem: BranchOfficesItem) {
+        return elektraDao.deleteSubscribedBranch(branchOfficesItem = branchOfficesItem)
+    }
+
 }

@@ -13,6 +13,7 @@ import com.delminius.electroero.presentation.ui.screens.subscriptions.Subscripti
 fun SetupNavigation(
     navController: NavHostController,
     onSubscribeClicked: (SnackBarContent) -> Unit,
+    onDeleteClicked: (SnackBarContent) -> Unit,
     isRefreshing: Boolean,
     stopRefreshing: (Boolean) -> Unit,
 ) {
@@ -32,7 +33,9 @@ fun SetupNavigation(
             )
         }
         composable(ApplicationScreens.SubscriptionScreen.route) {
-            SubscriptionsScreen()
+            SubscriptionsScreen(
+                onDeleteClicked = onDeleteClicked
+            )
         }
     }
 }

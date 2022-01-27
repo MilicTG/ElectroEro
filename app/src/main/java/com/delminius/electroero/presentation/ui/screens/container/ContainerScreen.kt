@@ -107,6 +107,14 @@ fun ContainerScreen(
                     )
                 )
             },
+            onDeleteClicked = { content ->
+                containerViewModel.onEvent(
+                    ContainerEvent.ShowSnackBar(
+                        message = content.snackMessage,
+                        action = content.snackAction
+                    )
+                )
+            },
             isRefreshing = isRefreshing,
             stopRefreshing = { isRefreshing = false }
         )

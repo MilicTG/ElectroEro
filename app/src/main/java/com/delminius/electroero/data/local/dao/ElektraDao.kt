@@ -1,9 +1,6 @@
 package com.delminius.electroero.data.local.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.delminius.electroero.domain.model.BranchOfficesItem
 import kotlinx.coroutines.flow.Flow
 
@@ -15,4 +12,7 @@ interface ElektraDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addToBranchSubscription(branchOfficesItem: BranchOfficesItem)
+
+    @Delete
+    suspend fun deleteSubscribedBranch(branchOfficesItem: BranchOfficesItem)
 }

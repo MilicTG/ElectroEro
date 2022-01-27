@@ -6,16 +6,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import com.delminius.electroero.R
 import com.delminius.electroero.presentation.ui.theme.*
 
 @Composable
-fun BranchesListCard(
+fun SubscriptionListCard(
+    branchId: Int,
     branchName: String,
-    onSubscribeClicked: () -> Unit
+    onDeleteClicked: (Int) -> Unit
 ) {
     Card(
         modifier = Modifier
@@ -25,7 +25,7 @@ fun BranchesListCard(
             )
             .fillMaxWidth(),
         shape = Shapes.large,
-        backgroundColor = PastelBlueColor,
+        backgroundColor = PastelYellowColor,
         contentColor = DarkBackgroundAndTextColor,
         elevation = CARD_ELEVATION
     )
@@ -46,10 +46,10 @@ fun BranchesListCard(
                     fontWeight = FontWeight.Medium
                 )
             )
-            IconButton(onClick = { onSubscribeClicked() }) {
+            IconButton(onClick = { onDeleteClicked(branchId) }) {
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_add),
-                    contentDescription = "Subscribe to branch",
+                    painter = painterResource(id = R.drawable.ic_delete),
+                    contentDescription = "Delete subscription",
                     tint = DarkBackgroundAndTextColor,
                     modifier = Modifier.size(CARD_ICON_SIZE)
                 )

@@ -4,5 +4,6 @@ data class UseCases(
     val getAllBranchOfficesUseCase: GetAllBranchOfficesUseCase,
     val getPowerCutOfficeUseCase: GetPowerCutOfficeUseCase,
     val getAllElektraSubscriptionUseCase: GetAllElektraSubscriptionUseCase,
-    val addToBranchSubscriptionUseCase: AddToBranchSubscriptionUseCase
+    val addToBranchSubscriptionUseCase: AddToBranchSubscriptionUseCase,
+    val deleteSubscribedBranchUseCase: DeleteSubscribedBranchUseCase
 )
