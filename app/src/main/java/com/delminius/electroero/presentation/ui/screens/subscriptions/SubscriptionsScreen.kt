@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 
@@ -14,14 +13,14 @@ fun SubscriptionsScreen(
     subscriptionViewModel: SubscriptionViewModel = hiltViewModel()
 ) {
 
-    val allSubscriptions = subscriptionViewModel.allBranchesSubscription.collectAsState()
+    val allSubscriptions = subscriptionViewModel.allBranchesSubscriptionState.value
 
     Column(
         modifier = Modifier
             .fillMaxSize()
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
-            Text(text = allSubscriptions.value.toString())
+            Text(text = allSubscriptions.subscribedBranches.toString())
         }
     }
 }

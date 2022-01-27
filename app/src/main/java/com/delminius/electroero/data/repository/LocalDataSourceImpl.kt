@@ -1,14 +1,13 @@
 package com.delminius.electroero.data.repository
 
-import com.delminius.electroero.data.local.ElektraDatabase
+import com.delminius.electroero.data.local.dao.ElektraDao
 import com.delminius.electroero.domain.model.BranchOfficesItem
 import com.delminius.electroero.domain.repository.LocalDataSource
+import kotlinx.coroutines.flow.Flow
 
-class LocalDataSourceImpl(elektraDatabase: ElektraDatabase) : LocalDataSource {
+class LocalDataSourceImpl(private val elektraDao: ElektraDao) : LocalDataSource {
 
-    private val elektraDao = elektraDatabase.elektraDao()
-
-    override suspend fun getAllBranches(): List<BranchOfficesItem> {
+    override fun getAllBranches(): Flow<List<BranchOfficesItem>> {
         return elektraDao.getAllBranches()
     }
 

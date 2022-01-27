@@ -15,7 +15,6 @@ import com.delminius.electroero.presentation.ui.components.DownloadingInProgress
 import com.delminius.electroero.presentation.ui.components.ErrorDownloadingComponent
 import com.delminius.electroero.presentation.ui.theme.BOTTOM_PADDING
 import com.delminius.electroero.presentation.ui.theme.LARGE_PADDING
-import com.delminius.electroero.presentation.ui.theme.NORMAL_PADDING
 import com.delminius.electroero.presentation.ui.theme.SMALL_PADDING
 import com.delminius.electroero.util.Resource
 
@@ -44,6 +43,9 @@ fun BranchesScreen(
                         BranchesListCard(
                             branchName = branches.value.data!![branchOffice].name,
                             onSubscribeClicked = {
+                                branchesViewModel.onEvent(
+                                    BranchesEvent.OnSubscribeToBranchClicked(branches.value.data!![branchOffice])
+                                )
                                 onSubscribeClicked(
                                     SnackBarContent(
                                         snackMessage = "Poslovnica dodana",

@@ -6,6 +6,7 @@ import com.delminius.electroero.domain.model.PowerCutOffice
 import com.delminius.electroero.domain.repository.LocalDataSource
 import com.delminius.electroero.domain.repository.RemoteDataSource
 import com.delminius.electroero.util.Resource
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class Repository @Inject constructor(
@@ -20,7 +21,7 @@ class Repository @Inject constructor(
         return remoteDataSource.getPowerCutDataForSpecificDate(date = date)
     }
 
-    suspend fun getAllBranches(): List<BranchOfficesItem> {
+    fun getAllBranches(): Flow<List<BranchOfficesItem>> {
         return localDataSource.getAllBranches()
     }
 

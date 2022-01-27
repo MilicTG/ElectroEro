@@ -35,7 +35,7 @@ object DatabaseModule {
         database: ElektraDatabase
     ): LocalDataSource {
         return LocalDataSourceImpl(
-            elektraDatabase = database
+            elektraDao = database.elektraDao()
         )
     }
 }
