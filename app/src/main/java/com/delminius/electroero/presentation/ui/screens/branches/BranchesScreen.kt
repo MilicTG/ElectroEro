@@ -14,8 +14,7 @@ import com.delminius.electroero.presentation.ui.components.BranchesListCard
 import com.delminius.electroero.presentation.ui.components.DownloadingInProgress
 import com.delminius.electroero.presentation.ui.components.ErrorDownloadingComponent
 import com.delminius.electroero.presentation.ui.theme.BOTTOM_PADDING
-import com.delminius.electroero.presentation.ui.theme.LARGE_PADDING
-import com.delminius.electroero.presentation.ui.theme.SMALL_PADDING
+import com.delminius.electroero.presentation.ui.theme.NORMAL_PADDING
 import com.delminius.electroero.util.Resource
 
 @Composable
@@ -33,8 +32,7 @@ fun BranchesScreen(
             is Resource.Success -> {
                 LazyColumn(
                     contentPadding = PaddingValues(
-                        top = SMALL_PADDING,
-                        bottom = LARGE_PADDING
+                        vertical = NORMAL_PADDING,
                     )
                 ) {
                     items(

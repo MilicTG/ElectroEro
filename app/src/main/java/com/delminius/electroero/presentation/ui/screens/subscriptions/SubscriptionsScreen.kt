@@ -13,8 +13,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.delminius.electroero.domain.model.SnackBarContent
 import com.delminius.electroero.presentation.ui.components.SubscriptionListCard
 import com.delminius.electroero.presentation.ui.theme.BOTTOM_PADDING
-import com.delminius.electroero.presentation.ui.theme.LARGE_PADDING
-import com.delminius.electroero.presentation.ui.theme.SMALL_PADDING
+import com.delminius.electroero.presentation.ui.theme.NORMAL_PADDING
 
 @Composable
 fun SubscriptionsScreen(
@@ -34,8 +33,7 @@ fun SubscriptionsScreen(
         } else {
             LazyColumn(
                 contentPadding = PaddingValues(
-                    top = SMALL_PADDING,
-                    bottom = LARGE_PADDING
+                    vertical = NORMAL_PADDING,
                 )
             ) {
                 items(allSubscriptions.subscribedBranches.size) { branch ->

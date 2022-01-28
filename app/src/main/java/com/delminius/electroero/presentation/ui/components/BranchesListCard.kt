@@ -20,8 +20,7 @@ fun BranchesListCard(
     Card(
         modifier = Modifier
             .padding(
-                horizontal = LARGE_PADDING,
-                vertical = SEMI_LARGE_PADDING
+                all = SEMI_LARGE_PADDING
             )
             .fillMaxWidth(),
         shape = Shapes.large,
@@ -34,7 +33,7 @@ fun BranchesListCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(
-                    all = NORMAL_PADDING
+                    horizontal = NORMAL_PADDING
                 ),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
@@ -42,7 +41,7 @@ fun BranchesListCard(
             Text(
                 text = branchName,
                 overflow = TextOverflow.Ellipsis,
-                style = MaterialTheme.typography.h6.copy(
+                style = MaterialTheme.typography.body2.copy(
                     fontWeight = FontWeight.Medium
                 )
             )
