@@ -7,8 +7,11 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface ElektraDao {
 
-    @Query("SELECT * FROM branch_office")
+    @Query(value = "SELECT * FROM branch_office")
     fun getAllBranches(): Flow<List<BranchOfficesItem>>
+
+    @Query(value = "SELECT * FROM branch_office")
+    fun getAllBranchesForCompare(): List<BranchOfficesItem>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addToBranchSubscription(branchOfficesItem: BranchOfficesItem)

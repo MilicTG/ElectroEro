@@ -25,6 +25,10 @@ class Repository @Inject constructor(
         return localDataSource.getAllBranches()
     }
 
+    fun getAllBranchesForCompare(): List<BranchOfficesItem> {
+        return localDataSource.getAllBranchesForCompare()
+    }
+
     suspend fun addToBranchSubscription(branchOfficesItem: BranchOfficesItem) {
         return localDataSource.addToBranchSubscription(branchOfficesItem = branchOfficesItem)
     }

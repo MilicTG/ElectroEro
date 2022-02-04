@@ -11,6 +11,10 @@ class LocalDataSourceImpl(private val elektraDao: ElektraDao) : LocalDataSource 
         return elektraDao.getAllBranches()
     }
 
+    override fun getAllBranchesForCompare(): List<BranchOfficesItem> {
+        return elektraDao.getAllBranchesForCompare()
+    }
+
     override suspend fun addToBranchSubscription(branchOfficesItem: BranchOfficesItem) {
         return elektraDao.addToBranchSubscription(branchOfficesItem = branchOfficesItem)
     }

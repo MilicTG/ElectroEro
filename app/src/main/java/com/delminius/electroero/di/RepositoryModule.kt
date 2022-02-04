@@ -17,6 +17,7 @@ object RepositoryModule {
     fun provideUseCases(repository: Repository): UseCases {
         return UseCases(
             getAllBranchOfficesUseCase = GetAllBranchOfficesUseCase(repository = repository),
+            getAllBranchesForCompare = GetAllBranchesForCompare(repository = repository),
             getPowerCutOfficeUseCase = GetPowerCutOfficeUseCase(repository = repository),
             getAllElektraSubscriptionUseCase = GetAllElektraSubscriptionUseCase(repository = repository),
             addToBranchSubscriptionUseCase = AddToBranchSubscriptionUseCase(repository = repository),
