@@ -10,6 +10,7 @@ import com.delminius.electroero.presentation.ui.screens.container.ContainerScree
 import com.delminius.electroero.presentation.ui.theme.ElectroEroTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.InternalCoroutinesApi
+import java.util.concurrent.TimeUnit
 
 @InternalCoroutinesApi
 @AndroidEntryPoint
@@ -41,14 +42,16 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun createPeriodicWorkRequest() {
-        val branchWork = OneTimeWorkRequestBuilder<CheckForPowerOutagesWorker>()
+        val branchWork = PeriodicWorkRequestBuilder<CheckForPowerOutagesWorker>(
+            5, TimeUnit.MINUTES
+        )
             .setConstraints(workerConstraints)
             .addTag("branchWork")
             .build()
 
-        workManager.enqueueUniqueWork(
-            "oneTimeWorker",
-            ExistingWorkPolicy.KEEP,
+        workManager.enqueueUniquePeriodicWork(
+            "outagesWorker",
+            ExistingPeriodicWorkPolicy.KEEP,
             branchWork
         )
     }
