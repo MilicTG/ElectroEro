@@ -7,4 +7,6 @@ object Constants {
 
     const val ELEKTRA_DATABASE = "elektra_database"
 
+    const val NOTIFICATION_CHANNEL_ID = "elektra_id"
+
 }
