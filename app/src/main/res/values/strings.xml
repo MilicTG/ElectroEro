@@ -10,4 +10,5 @@
     <string name="refresh">Osvježi</string>
     <string name="info">Info</string>
     <string name="work_in_progress">Planirani radovi</string>
+    <string name="notification_desc">Poslovnica koju pratite ima planirane radove.</string>
 </resources>

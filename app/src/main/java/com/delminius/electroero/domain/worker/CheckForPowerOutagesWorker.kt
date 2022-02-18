@@ -7,7 +7,6 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.hilt.work.HiltWorker
@@ -17,7 +16,6 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import kotlinx.datetime.*
 import com.delminius.electroero.R
-import com.delminius.electroero.domain.model.BranchOfficesItem
 import com.delminius.electroero.presentation.activity.MainActivity
 import com.delminius.electroero.util.Constants.NOTIFICATION_CHANNEL_ID
 import kotlinx.coroutines.InternalCoroutinesApi
@@ -38,34 +36,30 @@ class CheckForPowerOutagesWorker @AssistedInject constructor(
         val activeBranchesCall =
             useCases.getPowerCutOfficeUseCase(date = secondPowerCutDay.toString()).data?.toList()
 
-
         val allBranchesInDb = useCases.getAllBranchesForCompare.invoke()
 
         val difference =
             allBranchesInDb.filter { it.id in activeBranchesCall!!.map { item -> item.branchOfficeId } }
 
-        Log.d("ovde", difference.toString())
-
-        setForeground(createForegroundInfo(difference))
+        setForeground(createForegroundInfo())
 
         return Result.success(workDataOf("OUTAGES" to difference))
     }
 
-    private fun createForegroundInfo(listOfOutages: List<BranchOfficesItem>): ForegroundInfo {
+    private fun createForegroundInfo(): ForegroundInfo {
         val intent = Intent(applicationContext, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
         val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
-        val listContent: String = listOfOutages.map { it.name }.toString()
         val notification = NotificationCompat.Builder(
             applicationContext, NOTIFICATION_CHANNEL_ID
         )
             .setContentTitle(context.getString(R.string.work_in_progress))
-            .setContentText(listContent)
+            .setContentText(context.getString(R.string.notification_desc))
             .setSmallIcon(R.mipmap.ic_launcher)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentIntent(pendingIntent)
-            .setAutoCancel(true)
+            .setAutoCancel(false)
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
