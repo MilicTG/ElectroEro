@@ -43,15 +43,13 @@ class MainActivity : ComponentActivity() {
 
     private fun createPeriodicWorkRequest() {
         val branchWork = PeriodicWorkRequestBuilder<CheckForPowerOutagesWorker>(
-            5, TimeUnit.MINUTES
+            15, TimeUnit.MINUTES
         )
             .setConstraints(workerConstraints)
             .addTag("branchWork")
             .build()
 
-        workManager.enqueueUniquePeriodicWork(
-            "outagesWorker",
-            ExistingPeriodicWorkPolicy.KEEP,
+        workManager.enqueue(
             branchWork
         )
     }
