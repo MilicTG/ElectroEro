@@ -7,6 +7,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.hilt.work.HiltWorker
@@ -30,27 +31,50 @@ class CheckForPowerOutagesWorker @AssistedInject constructor(
 
     private val firstPowerCutDay: LocalDate = Clock.System.todayAt(TimeZone.currentSystemDefault())
     private val secondPowerCutDay = firstPowerCutDay.plus(1, DateTimeUnit.DAY)
+    private val thirdPowerCutDay = firstPowerCutDay.plus(1, DateTimeUnit.DAY)
 
 
     override suspend fun doWork(): Result {
-        val activeBranchesCall =
-            useCases.getPowerCutOfficeUseCase(date = secondPowerCutDay.toString()).data?.toList()
 
+        val isFirstDayActive = checkForActiveDay(firstPowerCutDay)
+        val isSecondDayActive = checkForActiveDay(secondPowerCutDay)
+        val isThirdDayActive = checkForActiveDay(thirdPowerCutDay)
+
+        if (isFirstDayActive || isSecondDayActive || isThirdDayActive) {
+            setForeground(createForegroundInfo())
+        }
+
+        return Result.success()
+    }
+
+    private suspend fun checkForActiveDay(date: LocalDate): Boolean {
+        val activeBranchesCall =
+            useCases.getPowerCutOfficeUseCase(date = date.toString()).data?.toList()
         val allBranchesInDb = useCases.getAllBranchesForCompare.invoke()
 
         val difference =
             allBranchesInDb.filter { it.id in activeBranchesCall!!.map { item -> item.branchOfficeId } }
 
-        setForeground(createForegroundInfo())
+        Log.d("ovde", difference.toString())
 
-        return Result.success(workDataOf("OUTAGES" to difference))
+        return difference.isNotEmpty()
     }
 
     private fun createForegroundInfo(): ForegroundInfo {
         val intent = Intent(applicationContext, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
-        val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
+
+        val pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            PendingIntent.getActivity(
+                context, 0, intent, PendingIntent.FLAG_MUTABLE
+            )
+        } else {
+            PendingIntent.getActivity(
+                context, 0, intent, PendingIntent.FLAG_ONE_SHOT
+            )
+        }
+
         val notification = NotificationCompat.Builder(
             applicationContext, NOTIFICATION_CHANNEL_ID
         )
@@ -59,7 +83,7 @@ class CheckForPowerOutagesWorker @AssistedInject constructor(
             .setSmallIcon(R.mipmap.ic_launcher)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentIntent(pendingIntent)
-            .setAutoCancel(false)
+            .setAutoCancel(true)
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
