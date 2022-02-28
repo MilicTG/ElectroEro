@@ -31,16 +31,16 @@ class CheckForPowerOutagesWorker @AssistedInject constructor(
 
     private val firstPowerCutDay: LocalDate = Clock.System.todayAt(TimeZone.currentSystemDefault())
     private val secondPowerCutDay = firstPowerCutDay.plus(1, DateTimeUnit.DAY)
-    private val thirdPowerCutDay = firstPowerCutDay.plus(1, DateTimeUnit.DAY)
+    private val thirdPowerCutDay = firstPowerCutDay.plus(2, DateTimeUnit.DAY)
 
 
     override suspend fun doWork(): Result {
 
-        val isFirstDayActive = checkForActiveDay(firstPowerCutDay)
         val isSecondDayActive = checkForActiveDay(secondPowerCutDay)
         val isThirdDayActive = checkForActiveDay(thirdPowerCutDay)
 
-        if (isFirstDayActive || isSecondDayActive || isThirdDayActive) {
+        if (isSecondDayActive || isThirdDayActive) {
+            Log.d("ovde", isSecondDayActive.toString())
             setForeground(createForegroundInfo())
         }
 
@@ -49,13 +49,14 @@ class CheckForPowerOutagesWorker @AssistedInject constructor(
 
     private suspend fun checkForActiveDay(date: LocalDate): Boolean {
         val activeBranchesCall =
-            useCases.getPowerCutOfficeUseCase(date = date.toString()).data?.toList()
+            useCases.getPowerCutOfficeUseCase.invoke(date = date.toString()).data
+
         val allBranchesInDb = useCases.getAllBranchesForCompare.invoke()
 
         val difference =
             allBranchesInDb.filter { it.id in activeBranchesCall!!.map { item -> item.branchOfficeId } }
 
-        Log.d("ovde", difference.toString())
+        Log.d("ovde", activeBranchesCall.toString())
 
         return difference.isNotEmpty()
     }
@@ -67,7 +68,7 @@ class CheckForPowerOutagesWorker @AssistedInject constructor(
 
         val pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             PendingIntent.getActivity(
-                context, 0, intent, PendingIntent.FLAG_MUTABLE
+                context, 0, intent, PendingIntent.FLAG_IMMUTABLE
             )
         } else {
             PendingIntent.getActivity(
@@ -78,18 +79,18 @@ class CheckForPowerOutagesWorker @AssistedInject constructor(
         val notification = NotificationCompat.Builder(
             applicationContext, NOTIFICATION_CHANNEL_ID
         )
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setOngoing(false)
             .setContentTitle(context.getString(R.string.work_in_progress))
             .setContentText(context.getString(R.string.notification_desc))
             .setSmallIcon(R.mipmap.ic_launcher)
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-            .setContentIntent(pendingIntent)
             .setAutoCancel(true)
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createChannel(notification, NOTIFICATION_CHANNEL_ID)
         }
-        return ForegroundInfo(1, notification.build())
+        return ForegroundInfo(4077, notification.build())
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
