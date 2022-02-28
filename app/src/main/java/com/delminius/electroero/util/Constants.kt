@@ -6,7 +6,4 @@ object Constants {
     const val DATE_PATTERN = "EEEE dd.MM.yyyy"
 
     const val ELEKTRA_DATABASE = "elektra_database"
-
-    const val NOTIFICATION_CHANNEL_ID = "elektra_id"
-
 }

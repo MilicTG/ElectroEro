@@ -43,7 +43,7 @@ class MainActivity : ComponentActivity() {
 
     private fun createPeriodicWorkRequest() {
         val branchWork = PeriodicWorkRequestBuilder<CheckForPowerOutagesWorker>(
-            15, TimeUnit.MINUTES
+            16, TimeUnit.HOURS
         )
             .setConstraints(workerConstraints)
             .addTag("branchWork")
