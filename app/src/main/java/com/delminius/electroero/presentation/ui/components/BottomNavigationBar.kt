@@ -1,9 +1,6 @@
 package com.delminius.electroero.presentation.ui.components
 
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
@@ -51,12 +48,12 @@ fun BottomNavigationBar(
                         fontSize = 9.sp
                     )
                 },
-                selectedContentColor = LightBackgroundAndTextColor,
-                unselectedContentColor = Color.Gray.copy(alpha = 0.6f),
+                selectedContentColor = Color.White,
+                unselectedContentColor = Color.Gray,
                 alwaysShowLabel = true,
                 onClick = {
-                    navController.navigate(screen.route){
-                        popUpTo(navController.graph.findStartDestination().id){
+                    navController.navigate(screen.route) {
+                        popUpTo(navController.graph.findStartDestination().id) {
                             saveState = true
                         }
                         launchSingleTop = true

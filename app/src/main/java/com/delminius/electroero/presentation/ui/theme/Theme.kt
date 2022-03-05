@@ -9,7 +9,13 @@ import androidx.compose.runtime.Composable
 private val DarkColorPalette = darkColors(
     primary = PastelBlueColor,
     primaryVariant = PastelYellowColor,
-    secondary = PastelRedColor
+    secondary = PastelRedColor,
+    background = DarkBackgroundAndTextColor,
+    surface = DarkBackgroundAndTextColor,
+    onPrimary = LightBackgroundAndTextColor,
+    onSecondary = LightBackgroundAndTextColor,
+    onBackground = LightBackgroundAndTextColor,
+    onSurface = LightBackgroundAndTextColor
 )
 
 private val LightColorPalette = lightColors(
@@ -26,15 +32,15 @@ private val LightColorPalette = lightColors(
 
 @Composable
 fun ElectroEroTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable() () -> Unit) {
-    //TODO themes later
-//    val colors = if (darkTheme) {
-//        DarkColorPalette
-//    } else {
-//        LightColorPalette
-//    }
+
+    val colors = if (darkTheme) {
+        DarkColorPalette
+    } else {
+        LightColorPalette
+    }
 
     MaterialTheme(
-        colors = LightColorPalette,
+        colors = colors,
         typography = Typography,
         shapes = Shapes,
         content = content

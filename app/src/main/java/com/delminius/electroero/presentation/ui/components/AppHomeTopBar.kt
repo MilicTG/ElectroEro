@@ -5,7 +5,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.delminius.electroero.R
-import com.delminius.electroero.presentation.ui.theme.DarkBackgroundAndTextColor
 
 @Composable
 fun AppHomeTopBar(
@@ -21,7 +20,7 @@ fun AppHomeTopBar(
         },
         elevation = 0.dp,
         backgroundColor = MaterialTheme.colors.background,
-        contentColor = DarkBackgroundAndTextColor,
+        contentColor = MaterialTheme.colors.onBackground,
         actions = {
             IconButton(
                 onClick = { onRefreshClicked() }
