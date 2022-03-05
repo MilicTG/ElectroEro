@@ -71,12 +71,12 @@ dependencies {
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 
     // Compose Navigation
-    implementation("androidx.navigation:navigation-compose:2.5.0-alpha02")
+    implementation("androidx.navigation:navigation-compose:2.5.0-alpha03")
 
     // Room components
-    implementation "androidx.room:room-runtime:2.4.1"
-    kapt "androidx.room:room-compiler:2.4.1"
-    implementation "androidx.room:room-ktx:2.4.1"
+    implementation "androidx.room:room-runtime:2.4.2"
+    kapt "androidx.room:room-compiler:2.4.2"
+    implementation "androidx.room:room-ktx:2.4.2"
 
     //WorkManager
     implementation 'androidx.work:work-runtime-ktx:2.7.1'
