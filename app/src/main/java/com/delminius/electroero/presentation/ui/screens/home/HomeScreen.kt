@@ -5,11 +5,10 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.delminius.electroero.domain.model.PowerCutOffice
 import com.delminius.electroero.presentation.ui.components.*
 import com.delminius.electroero.presentation.ui.theme.*
 import com.delminius.electroero.util.Resource
@@ -24,6 +23,18 @@ fun HomeScreen(
     val secondDayPowerCutDayList = homeViewModel.secondDayPowerCutDayList.collectAsState()
     val thirdDayPowerCutDayList = homeViewModel.thirdDayPowerCutDayList.collectAsState()
 
+    val isFirstListLoaded = remember {
+        mutableStateOf(value = false)
+    }
+
+    val isSecondListLoaded = remember {
+        mutableStateOf(value = false)
+    }
+
+    val isThirdListLoaded = remember {
+        mutableStateOf(value = false)
+    }
+
     LaunchedEffect(key1 = isRefreshing) {
         when (isRefreshing) {
             true -> {
@@ -33,6 +44,14 @@ fun HomeScreen(
                 stopRefreshing(false)
             }
         }
+    }
+
+    if (
+        firstDayPowerCutDayList.value == Resource.Loading<State<Resource<PowerCutOffice>>>() &&
+        secondDayPowerCutDayList.value == Resource.Loading<State<Resource<PowerCutOffice>>>() &&
+        thirdDayPowerCutDayList.value == Resource.Loading<State<Resource<PowerCutOffice>>>()
+    ) {
+        
     }
 
     Column(
