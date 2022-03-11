@@ -8,7 +8,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.delminius.electroero.domain.model.PowerCutOffice
 import com.delminius.electroero.presentation.ui.components.*
 import com.delminius.electroero.presentation.ui.theme.*
 import com.delminius.electroero.util.Resource
@@ -23,18 +22,6 @@ fun HomeScreen(
     val secondDayPowerCutDayList = homeViewModel.secondDayPowerCutDayList.collectAsState()
     val thirdDayPowerCutDayList = homeViewModel.thirdDayPowerCutDayList.collectAsState()
 
-    val isFirstListLoaded = remember {
-        mutableStateOf(value = false)
-    }
-
-    val isSecondListLoaded = remember {
-        mutableStateOf(value = false)
-    }
-
-    val isThirdListLoaded = remember {
-        mutableStateOf(value = false)
-    }
-
     LaunchedEffect(key1 = isRefreshing) {
         when (isRefreshing) {
             true -> {
@@ -44,14 +31,6 @@ fun HomeScreen(
                 stopRefreshing(false)
             }
         }
-    }
-
-    if (
-        firstDayPowerCutDayList.value == Resource.Loading<State<Resource<PowerCutOffice>>>() &&
-        secondDayPowerCutDayList.value == Resource.Loading<State<Resource<PowerCutOffice>>>() &&
-        thirdDayPowerCutDayList.value == Resource.Loading<State<Resource<PowerCutOffice>>>()
-    ) {
-        
     }
 
     Column(
@@ -70,7 +49,14 @@ fun HomeScreen(
             }
             when (firstDayPowerCutDayList.value) {
                 is Resource.Loading -> {
-                    item { DownloadingInProgress() }
+                    item {
+                        LoadingAndErrorCard(
+                            isDownloading = true,
+                            isError = false,
+                            errorMessage = "",
+                            background = PastelBlueColor
+                        )
+                    }
                 }
                 is Resource.Success -> {
                     stopRefreshing(false)
@@ -106,7 +92,14 @@ fun HomeScreen(
             }
             when (secondDayPowerCutDayList.value) {
                 is Resource.Loading -> {
-                    item { DownloadingInProgress() }
+                    item {
+                        LoadingAndErrorCard(
+                            isDownloading = true,
+                            isError = false,
+                            errorMessage = "",
+                            background = PastelYellowColor
+                        )
+                    }
                 }
                 is Resource.Success -> {
                     stopRefreshing(false)
@@ -142,7 +135,14 @@ fun HomeScreen(
             }
             when (thirdDayPowerCutDayList.value) {
                 is Resource.Loading -> {
-                    item { DownloadingInProgress() }
+                    item {
+                        LoadingAndErrorCard(
+                            isDownloading = true,
+                            isError = false,
+                            errorMessage = "",
+                            background = PastelRedColor
+                        )
+                    }
                 }
                 is Resource.Success -> {
                     stopRefreshing(false)
