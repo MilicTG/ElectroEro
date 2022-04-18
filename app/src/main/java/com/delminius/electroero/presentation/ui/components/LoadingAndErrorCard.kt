@@ -11,6 +11,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import com.delminius.electroero.presentation.ui.theme.*
 
 @Composable
@@ -53,8 +54,8 @@ fun LoadingAndErrorCard(
             CircularProgressIndicator(
                 modifier = Modifier
                     .size(SPINNER_DOWNLOADING_SIZE)
-                    .padding(bottom = EXTRA_LARGE_PADDING),
-                color = MaterialTheme.colors.secondary
+                    .padding(all = EXTRA_LARGE_PADDING),
+                color = MaterialTheme.colors.background
             )
 
             Text(
