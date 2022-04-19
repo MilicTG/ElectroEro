@@ -11,7 +11,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import com.delminius.electroero.presentation.ui.theme.*
 
 @Composable
@@ -53,11 +52,14 @@ fun LoadingAndErrorCard(
                     vertical = SMALL_PADDING
                 ),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
+            horizontalArrangement = Arrangement.Start
         ) {
             CircularProgressIndicator(
                 modifier = Modifier
-                    .padding(all = NORMAL_PADDING),
+                    .padding(
+                        vertical = LARGE_PADDING,
+                        horizontal = NORMAL_PADDING
+                    ),
                 color = PastelRedColor
             )
 
