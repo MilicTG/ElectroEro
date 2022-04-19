@@ -6,8 +6,8 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -19,7 +19,6 @@ fun LoadingAndErrorCard(
     isDownloading: Boolean,
     isError: Boolean,
     errorMessage: String,
-    background: Color,
 ) {
     Card(
         modifier = Modifier
@@ -29,7 +28,7 @@ fun LoadingAndErrorCard(
             )
             .fillMaxWidth(),
         shape = Shapes.large,
-        backgroundColor = background,
+        backgroundColor = PastelBlueColor,
         contentColor = DarkBackgroundAndTextColor,
         elevation = CARD_ELEVATION
     ) {
@@ -49,20 +48,24 @@ fun LoadingAndErrorCard(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = NORMAL_PADDING),
+                .padding(
+                    horizontal = NORMAL_PADDING,
+                    vertical = SMALL_PADDING
+                ),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
             CircularProgressIndicator(
                 modifier = Modifier
-                    .size(SPINNER_DOWNLOADING_SIZE)
-                    .padding(all = EXTRA_LARGE_PADDING),
-                color = MaterialTheme.colors.background
+                    .padding(all = NORMAL_PADDING),
+                color = PastelRedColor
             )
 
             Text(
                 text = text,
                 style = TextStyle(
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = MaterialTheme.typography.h6.fontSize
+                    fontWeight = FontWeight.Medium,
+                    fontSize = MaterialTheme.typography.subtitle1.fontSize
                 ),
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier

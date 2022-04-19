@@ -15,7 +15,7 @@ import com.delminius.electroero.presentation.ui.theme.*
 
 @Composable
 fun PowerCutNoWorkCard(
-    background: Color,
+
 ) {
     Card(
         modifier = Modifier
@@ -25,7 +25,7 @@ fun PowerCutNoWorkCard(
             )
             .fillMaxWidth(),
         shape = Shapes.large,
-        backgroundColor = background,
+        backgroundColor = PastelBlueColor,
         contentColor = DarkBackgroundAndTextColor,
         elevation = CARD_ELEVATION
     ) {

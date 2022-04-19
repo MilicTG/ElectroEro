@@ -54,7 +54,6 @@ fun HomeScreen(
                             isDownloading = true,
                             isError = false,
                             errorMessage = "",
-                            background = PastelBlueColor
                         )
                     }
                 }
@@ -62,12 +61,11 @@ fun HomeScreen(
                     stopRefreshing(false)
                     if (firstDayPowerCutDayList.value.data!!.isEmpty()) {
                         items(count = 1) {
-                            PowerCutNoWorkCard(background = PastelBlueColor)
+                            PowerCutNoWorkCard()
                         }
                     } else {
                         items(firstDayPowerCutDayList.value.data!!.size) { powerCutItem ->
                             PowerCutDayCard(
-                                background = PastelBlueColor,
                                 branchName = firstDayPowerCutDayList.value.data!![powerCutItem].branchOfficeName,
                                 powerCutLocation = firstDayPowerCutDayList.value.data!![powerCutItem].location,
                                 powerCutTimeFrom = firstDayPowerCutDayList.value.data!![powerCutItem].dateFrom,
@@ -97,7 +95,6 @@ fun HomeScreen(
                             isDownloading = true,
                             isError = false,
                             errorMessage = "",
-                            background = PastelYellowColor
                         )
                     }
                 }
@@ -105,12 +102,11 @@ fun HomeScreen(
                     stopRefreshing(false)
                     if (secondDayPowerCutDayList.value.data!!.isEmpty()) {
                         items(count = 1) {
-                            PowerCutNoWorkCard(background = PastelYellowColor)
+                            PowerCutNoWorkCard()
                         }
                     } else {
                         items(secondDayPowerCutDayList.value.data!!.size) { powerCutItem ->
                             PowerCutDayCard(
-                                background = PastelYellowColor,
                                 branchName = secondDayPowerCutDayList.value.data!![powerCutItem].branchOfficeName,
                                 powerCutLocation = secondDayPowerCutDayList.value.data!![powerCutItem].location,
                                 powerCutTimeFrom = secondDayPowerCutDayList.value.data!![powerCutItem].dateFrom,
@@ -140,7 +136,6 @@ fun HomeScreen(
                             isDownloading = true,
                             isError = false,
                             errorMessage = "",
-                            background = PastelRedColor
                         )
                     }
                 }
@@ -148,12 +143,11 @@ fun HomeScreen(
                     stopRefreshing(false)
                     if (thirdDayPowerCutDayList.value.data!!.isEmpty()) {
                         items(1) {
-                            PowerCutNoWorkCard(background = PastelRedColor)
+                            PowerCutNoWorkCard()
                         }
                     } else {
                         items(thirdDayPowerCutDayList.value.data!!.size) { powerCutItem ->
                             PowerCutDayCard(
-                                background = PastelRedColor,
                                 branchName = thirdDayPowerCutDayList.value.data!![powerCutItem].branchOfficeName,
                                 powerCutLocation = thirdDayPowerCutDayList.value.data!![powerCutItem].location,
                                 powerCutTimeFrom = thirdDayPowerCutDayList.value.data!![powerCutItem].dateFrom,

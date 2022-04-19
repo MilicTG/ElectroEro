@@ -19,7 +19,6 @@ import com.delminius.electroero.util.getDayFromDateString
 
 @Composable
 fun PowerCutDayCard(
-    background: Color,
     branchName: String,
     powerCutLocation: String,
     powerCutTimeFrom: String,
@@ -33,7 +32,7 @@ fun PowerCutDayCard(
             )
             .fillMaxWidth(),
         shape = Shapes.large,
-        backgroundColor = background,
+        backgroundColor = PastelBlueColor,
         contentColor = DarkBackgroundAndTextColor,
         elevation = CARD_ELEVATION
     ) {
