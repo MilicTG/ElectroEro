@@ -67,6 +67,10 @@ dependencies {
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
 
+    //Material you
+    implementation "androidx.compose.material3:material3:1.0.0-alpha09"
+
+
     //Java 8+ dep
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 

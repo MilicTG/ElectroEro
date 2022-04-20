@@ -25,8 +25,8 @@ fun PowerCutNoWorkCard(
             )
             .fillMaxWidth(),
         shape = Shapes.large,
-        backgroundColor = PastelBlueColor,
-        contentColor = DarkBackgroundAndTextColor,
+        backgroundColor = MaterialTheme.colors.primary,
+        contentColor = MaterialTheme.colors.onPrimary,
         elevation = CARD_ELEVATION
     ) {
         Text(

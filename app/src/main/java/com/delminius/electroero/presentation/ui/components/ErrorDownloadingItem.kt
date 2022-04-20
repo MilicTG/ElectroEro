@@ -29,8 +29,8 @@ fun ErrorDownloadingComponent(
             )
             .fillMaxWidth(),
         shape = Shapes.large,
-        backgroundColor = PastelRedColor,
-        contentColor = DarkBackgroundAndTextColor,
+        backgroundColor = MaterialTheme.colors.error,
+        contentColor = MaterialTheme.colors.onError,
         elevation = CARD_ELEVATION
     ) {
 

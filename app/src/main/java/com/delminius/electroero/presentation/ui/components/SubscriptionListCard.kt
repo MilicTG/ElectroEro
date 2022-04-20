@@ -24,8 +24,8 @@ fun SubscriptionListCard(
             )
             .fillMaxWidth(),
         shape = Shapes.large,
-        backgroundColor = PastelYellowColor,
-        contentColor = DarkBackgroundAndTextColor,
+        backgroundColor = MaterialTheme.colors.primary,
+        contentColor = MaterialTheme.colors.onPrimary,
         elevation = CARD_ELEVATION
     )
     {
@@ -49,7 +49,7 @@ fun SubscriptionListCard(
                 Icon(
                     painter = painterResource(id = R.drawable.ic_delete),
                     contentDescription = "Delete subscription",
-                    tint = DarkBackgroundAndTextColor,
+                    tint = MaterialTheme.colors.onPrimary,
                     modifier = Modifier.size(CARD_ICON_SIZE)
                 )
             }

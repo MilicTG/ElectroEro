@@ -32,8 +32,8 @@ fun PowerCutDayCard(
             )
             .fillMaxWidth(),
         shape = Shapes.large,
-        backgroundColor = PastelBlueColor,
-        contentColor = DarkBackgroundAndTextColor,
+        backgroundColor = MaterialTheme.colors.primary,
+        contentColor = MaterialTheme.colors.onPrimary,
         elevation = CARD_ELEVATION
     ) {
         Column(
@@ -67,7 +67,7 @@ fun PowerCutDayCard(
                     )
             )
             Divider(
-                color = DarkBackgroundAndTextColor.copy(alpha = 0.3f),
+                color = MaterialTheme.colors.onPrimary.copy(alpha = 0.3f),
                 thickness = 1.dp,
                 modifier = Modifier
                     .padding(

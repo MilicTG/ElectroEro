@@ -1,6 +1,8 @@
 package com.delminius.electroero.presentation.ui.components
 
-import androidx.compose.material.*
+import androidx.compose.material.Icon
+import androidx.compose.material.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
@@ -11,8 +13,6 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.delminius.electroero.presentation.navigation.BottomNavigationItem
-import com.delminius.electroero.presentation.ui.theme.DarkBackgroundAndTextColor
-import com.delminius.electroero.presentation.ui.theme.LightBackgroundAndTextColor
 
 @Composable
 fun BottomNavigationBar(
@@ -27,12 +27,12 @@ fun BottomNavigationBar(
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
 
-    BottomNavigation(
-        backgroundColor = DarkBackgroundAndTextColor,
-        contentColor = LightBackgroundAndTextColor
+    NavigationBar(
+        containerColor = MaterialTheme.colorScheme.background,
+        contentColor = MaterialTheme.colorScheme.onBackground
     ) {
         navigationItems.forEach { screen ->
-            BottomNavigationItem(
+            NavigationBarItem(
                 selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
                 icon = {
                     Icon(
@@ -48,8 +48,11 @@ fun BottomNavigationBar(
                         fontSize = 9.sp
                     )
                 },
-                selectedContentColor = Color.White,
-                unselectedContentColor = Color.Gray,
+                colors = NavigationBarItemDefaults.colors(
+                    selectedIconColor = MaterialTheme.colorScheme.primary,
+                    unselectedIconColor = Color.Gray,
+                    indicatorColor = Color.Blue
+                ),
                 alwaysShowLabel = true,
                 onClick = {
                     navController.navigate(screen.route) {

@@ -7,7 +7,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.work.*
 import com.delminius.electroero.domain.worker.CheckForPowerOutagesWorker
 import com.delminius.electroero.presentation.ui.screens.container.ContainerScreen
-import com.delminius.electroero.presentation.ui.theme.ElectroEroTheme
+import com.delminius.electroero.presentation.ui.theme.ElectraTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.InternalCoroutinesApi
 import java.util.concurrent.TimeUnit
@@ -30,7 +30,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ElectroEroTheme {
+            ElectraTheme {
                 val navController = rememberNavController()
                 ContainerScreen(
                     navController = navController

@@ -27,8 +27,8 @@ fun LoadingAndErrorCard(
             )
             .fillMaxWidth(),
         shape = Shapes.large,
-        backgroundColor = PastelBlueColor,
-        contentColor = DarkBackgroundAndTextColor,
+        backgroundColor = MaterialTheme.colors.primary,
+        contentColor = MaterialTheme.colors.onPrimary,
         elevation = CARD_ELEVATION
     ) {
 
@@ -60,7 +60,7 @@ fun LoadingAndErrorCard(
                         vertical = LARGE_PADDING,
                         horizontal = NORMAL_PADDING
                     ),
-                color = PastelRedColor
+                color = MaterialTheme.colors.secondary
             )
 
             Text(

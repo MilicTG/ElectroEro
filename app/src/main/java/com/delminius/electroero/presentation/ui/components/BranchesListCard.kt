@@ -24,8 +24,8 @@ fun BranchesListCard(
             )
             .fillMaxWidth(),
         shape = Shapes.large,
-        backgroundColor = PastelBlueColor,
-        contentColor = DarkBackgroundAndTextColor,
+        backgroundColor = MaterialTheme.colors.primary,
+        contentColor = MaterialTheme.colors.onPrimary,
         elevation = CARD_ELEVATION
     )
     {
@@ -49,7 +49,7 @@ fun BranchesListCard(
                 Icon(
                     painter = painterResource(id = R.drawable.ic_add),
                     contentDescription = "Subscribe to branch",
-                    tint = DarkBackgroundAndTextColor,
+                    tint = MaterialTheme.colors.onPrimary,
                     modifier = Modifier.size(CARD_ICON_SIZE)
                 )
             }
