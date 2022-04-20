@@ -32,6 +32,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             ElectraTheme {
                 val navController = rememberNavController()
+                
                 ContainerScreen(
                     navController = navController
                 )

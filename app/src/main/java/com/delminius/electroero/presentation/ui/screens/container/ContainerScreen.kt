@@ -1,8 +1,13 @@
 package com.delminius.electroero.presentation.ui.screens.container
 
+import androidx.compose.animation.rememberSplineBasedDecay
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -12,9 +17,9 @@ import com.delminius.electroero.presentation.ui.components.AppHomeTopBar
 import com.delminius.electroero.presentation.ui.components.AppTopBar
 import com.delminius.electroero.presentation.ui.components.BottomNavigationBar
 import kotlinx.coroutines.InternalCoroutinesApi
-import kotlinx.coroutines.flow.collect
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 @InternalCoroutinesApi
 fun ContainerScreen(
@@ -24,6 +29,11 @@ fun ContainerScreen(
     val scaffoldState = rememberScaffoldState()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     var isRefreshing by remember { (mutableStateOf(value = false)) }
+
+    val decayAnimationSpec = rememberSplineBasedDecay<Float>()
+    val scrollBehavior = remember(decayAnimationSpec) {
+        TopAppBarDefaults.enterAlwaysScrollBehavior()
+    }
 
     LaunchedEffect(key1 = true) {
         containerViewModel.uiEvent.collect { event ->
@@ -42,12 +52,15 @@ fun ContainerScreen(
     }
 
     Scaffold(
+        modifier = Modifier
+            .nestedScroll(scrollBehavior.nestedScrollConnection),
         scaffoldState = scaffoldState,
         topBar = {
             when (navBackStackEntry?.destination?.route) {
                 ApplicationScreens.HomeScreen.route -> {
                     AppHomeTopBar(
                         title = "Planirani radovi",
+                        scrollBehavior = scrollBehavior,
                         onRefreshClicked = {
                             containerViewModel.onEvent(
                                 ContainerEvent.RefreshAction
@@ -66,6 +79,7 @@ fun ContainerScreen(
                 ApplicationScreens.BranchesScreen.route -> {
                     AppTopBar(
                         title = "Poslovnice",
+                        scrollBehavior = scrollBehavior,
                         onInfoClicked = {
                             containerViewModel.onEvent(
                                 ContainerEvent.TopAppBarAction(
@@ -79,6 +93,7 @@ fun ContainerScreen(
                 ApplicationScreens.SubscriptionScreen.route -> {
                     AppTopBar(
                         title = "Pretplate",
+                        scrollBehavior = scrollBehavior,
                         onInfoClicked = {
                             containerViewModel.onEvent(
                                 ContainerEvent.TopAppBarAction(

@@ -1,13 +1,11 @@
 package com.delminius.electroero.presentation.ui.components
 
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -28,8 +26,7 @@ fun BottomNavigationBar(
     val currentDestination = navBackStackEntry?.destination
 
     NavigationBar(
-        containerColor = MaterialTheme.colorScheme.background,
-        contentColor = MaterialTheme.colorScheme.onBackground
+        contentColor = MaterialTheme.colorScheme.background
     ) {
         navigationItems.forEach { screen ->
             NavigationBarItem(
@@ -45,13 +42,14 @@ fun BottomNavigationBar(
                 label = {
                     Text(
                         text = screen.title,
-                        fontSize = 9.sp
                     )
                 },
                 colors = NavigationBarItemDefaults.colors(
-                    selectedIconColor = MaterialTheme.colorScheme.primary,
-                    unselectedIconColor = Color.Gray,
-                    indicatorColor = Color.Blue
+                    selectedIconColor = MaterialTheme.colorScheme.onPrimary,
+                    selectedTextColor = MaterialTheme.colorScheme.onBackground,
+                    unselectedIconColor = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f),
+                    unselectedTextColor =  MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f),
+                    indicatorColor = MaterialTheme.colorScheme.primary
                 ),
                 alwaysShowLabel = true,
                 onClick = {
